@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantVision AI | Plant Disease Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🌿</div>
+
+        <div>
+            <h2>PlantVision</h2>
+            <span>AI Agriculture</span>
+        </div>
+    </div>
+
+    <nav>
+
+        <a href="#dashboard" class="nav-item active">
+            <span>⌂</span>
+            Dashboard
+        </a>
+
+        <a href="#detect" class="nav-item">
+            <span>🔍</span>
+            Disease Detection
+        </a>
+
+        <a href="#history" class="nav-item">
+            <span>📋</span>
+            Scan History
+        </a>
+
+        <a href="#about" class="nav-item">
+            <span>🧠</span>
+            About AI
+        </a>
+
+        <a href="#contact" class="nav-item">
+            <span>✉</span>
+            Contact
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <button class="theme-btn" onclick="toggleTheme()">
+            <span id="themeIcon">🌙</span>
+            <span>Dark Mode</span>
+        </button>
+
+        <button class="profile-mini" onclick="openProfile()">
+
+            <div class="avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Guest User</strong>
+                <small>View Profile</small>
+            </div>
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <button class="menu-btn" onclick="toggleSidebar()">
+            ☰
+        </button>
+
+        <div class="search">
+            🔎
+            <input
+                type="text"
+                placeholder="Search diseases, plants..."
+            >
+        </div>
+
+        <div class="top-actions">
+
+            <button class="icon-btn" onclick="showNotification('No new notifications')">
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+
+            <button class="profile-btn" onclick="openProfile()">
+                <div class="avatar">A</div>
+                <span>Guest</span>
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard" class="page-section">
+
+        <div class="welcome">
+
+            <div>
+
+                <p class="eyebrow">
+                    AI AGRICULTURE PLATFORM
+                </p>
+
+                <h1>
+                    Plant Health
+                    <span>Dashboard</span>
+                </h1>
+
+                <p>
+                    Detect plant diseases using Artificial Intelligence
+                    and Deep Learning technology.
+                </p>
+
+            </div>
+
+            <button
+                class="primary-btn"
+                onclick="scrollToDetection()">
+
+                + New Scan
+
+            </button>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🔬</div>
+
+                <div>
+                    <span>Total Scans</span>
+                    <h2 id="totalScans">128</h2>
+                    <small class="positive">↑ 12% this month</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🎯</div>
+
+                <div>
+                    <span>Model Accuracy</span>
+                    <h2>96.8%</h2>
+                    <small class="positive">CNN Model</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🌱</div>
+
+                <div>
+                    <span>Plant Classes</span>
+                    <h2>38</h2>
+                    <small>PlantVillage Dataset</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🦠</div>
+
+                <div>
+                    <span>Diseases Detected</span>
+                    <h2>26</h2>
+                    <small>Multiple categories</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="dashboard-grid">
+
+            <div class="info-card ai-card">
+
+                <div class="ai-content">
+
+                    <div class="ai-badge">
+                        ● AI ONLINE
+                    </div>
+
+                    <h2>
+                        Smart Plant
+                        <br>
+                        Disease Detection
+                    </h2>
+
+                    <p>
+                        Our CNN-based Deep Learning model analyzes
+                        plant leaf images and identifies possible diseases.
+                    </p>
+
+                    <button
+                        class="outline-btn"
+                        onclick="scrollToDetection()">
+
+                        Start Analysis →
+
+                    </button>
+
+                </div>
+
+                <div class="ai-visual">
+                    🧠
+                </div>
+
+            </div>
+
+
+            <div class="info-card model-card">
+
+                <div class="card-heading">
+
+                    <div>
+                        <span class="eyebrow">MODEL STATUS</span>
+                        <h3>CNN Deep Learning</h3>
+                    </div>
+
+                    <span class="status">● Active</span>
+
+                </div>
+
+                <div class="model-progress">
+
+                    <div class="progress-label">
+                        <span>Accuracy</span>
+                        <strong>96.8%</strong>
+                    </div>
+
+                    <div class="progress">
+                        <div style="width:96.8%"></div>
+                    </div>
+
+                </div>
+
+                <div class="model-details">
+
+                    <div>
+                        <span>Framework</span>
+                        <strong>TensorFlow</strong>
+                    </div>
+
+                    <div>
+                        <span>Architecture</span>
+                        <strong>CNN</strong>
+                    </div>
+
+                    <div>
+                        <span>Dataset</span>
+                        <strong>PlantVillage</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DETECTION ================= -->
+
+    <section id="detect" class="page-section detection-section">
+
+        <div class="section-title">
+
+            <div>
+                <span class="eyebrow">AI ANALYSIS</span>
+
+                <h2>
+                    Detect Plant Disease
+                </h2>
+
+                <p>
+                    Upload a clear image of a plant leaf for analysis.
+                </p>
+            </div>
+
+            <div class="ai-status">
+                <span></span>
+                AI Ready
+            </div>
+
+        </div>
+
+
+        <div class="detection-grid">
+
+            <!-- UPLOAD -->
+
+            <div class="upload-card">
+
+                <div
+                    class="drop-zone"
+                    id="dropZone"
+                    onclick="document.getElementById('imageInput').click()"
+                >
+
+                    <div class="upload-animation">
+
+                        <div class="upload-circle">
+                            📷
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Drop your leaf image here
+                    </h3>
+
+                    <p>
+                        or click to browse from your device
+                    </p>
+
+                    <div class="file-types">
+                        JPG • JPEG • PNG
+                    </div>
+
+                    <input
+                        type="file"
+                        id="imageInput"
+                        accept="image/png,image/jpeg,image/jpg"
+                        hidden
+                    >
+
+                </div>
+
+
+                <!-- PREVIEW -->
+
+                <div class="preview-container" id="previewContainer">
+
+                    <div class="preview-header">
+
+                        <strong>Image Preview</strong>
+
+                        <button onclick="removeImage()">
+                            ✕
+                        </button>
+
+                    </div>
+
+                    <div class="preview-wrapper">
+
+                        <img
+                            id="previewImage"
+                            alt="Plant Leaf Preview"
+                        >
+
+                        <div
+                            class="scanner"
+                            id="scanner">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="detect-main-btn"
+                    id="detectButton"
+                    onclick="startDetection()">
+
+                    <span>🧠</span>
+                    Analyze With AI
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div class="result-card">
+
+                <div class="result-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            AI PREDICTION
+                        </span>
+
+                        <h3>Analysis Result</h3>
+
+                    </div>
+
+                    <span
+                        class="result-status"
+                        id="resultStatus">
+
+                        Waiting
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="result-empty"
+                    id="resultEmpty">
+
+                    <div class="empty-icon">
+                        🌿
+                    </div>
+
+                    <h3>
+                        Ready for Analysis
+                    </h3>
+
+                    <p>
+                        Upload a plant leaf image and
+                        click "Analyze With AI".
+                    </p>
+
+                </div>
+
+
+                <!-- RESULT CONTENT -->
+
+                <div
+                    class="result-content"
+                    id="resultContent">
+
+                    <div class="disease-title">
+
+                        <div class="disease-icon">
+                            🍅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                DETECTED DISEASE
+                            </span>
+
+                            <h2 id="diseaseName">
+                                Tomato Early Blight
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIDENCE -->
+
+                    <div class="confidence-section">
+
+                        <div class="confidence-heading">
+
+                            <span>Confidence Score</span>
+
+                            <strong id="confidenceText">
+                                95.4%
+                            </strong>
+
+                        </div>
+
+                        <div class="confidence-bar">
+
+                            <div
+                                id="confidenceProgress"
+                                style="width:0%">
+                            </div>
+
+                        </div>
+
+                        <small>
+                            High confidence prediction
+                        </small>
+
+                    </div>
+
+
+                    <!-- DISEASE INFO -->
+
+                    <div class="disease-info">
+
+                        <h4>
+                            🦠 Disease Information
+                        </h4>
+
+                        <p id="diseaseDescription">
+
+                            Early blight is a fungal disease
+                            that commonly affects tomato leaves,
+                            causing dark spots and yellowing.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- TREATMENT -->
+
+                    <div class="recommendations">
+
+                        <div class="recommendation">
+
+                            <div class="rec-icon">
+                                💊
+                            </div>
+
+                            <div>
+                                <h4>Treatment</h4>
+
+                                <p id="treatment">
+                                    Remove infected leaves and
+                                    apply an appropriate fungicide.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="recommendation">
+
+                            <div class="rec-icon">
+                                🛡️
+                            </div>
+
+                            <div>
+                                <h4>Prevention</h4>
+
+                                <p id="prevention">
+                                    Maintain proper plant spacing
+                                    and avoid excessive leaf moisture.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="secondary-btn"
+                        onclick="saveScan()">
+
+                        💾 Save Result
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HISTORY ================= -->
+
+    <section id="history" class="page-section">
+
+        <div class="section-title">
+
+            <div>
+                <span class="eyebrow">ACTIVITY</span>
+                <h2>Recent Scan History</h2>
+            </div>
+
+            <button
+                class="secondary-btn"
+                onclick="clearHistory()">
+
+                Clear History
+
+            </button>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Plant</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyTable">
+
+                    <tr>
+
+                        <td>🍅 Tomato</td>
+
+                        <td>
+                            Early Blight
+                        </td>
+
+                        <td>
+                            <strong>95.4%</strong>
+                        </td>
+
+                        <td>
+                            Today
+                        </td>
+
+                        <td>
+                            <span class="healthy-status">
+                                Detected
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>🥔 Potato</td>
+
+                        <td>
+                            Late Blight
+                        </td>
+
+                        <td>
+                            <strong>92.1%</strong>
+                        </td>
+
+                        <td>
+                            Yesterday
+                        </td>
+
+                        <td>
+                            <span class="healthy-status">
+                                Detected
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>🌽 Corn</td>
+
+                        <td>
+                            Healthy
+                        </td>
+
+                        <td>
+                            <strong>98.2%</strong>
+                        </td>
+
+                        <td>
+                            2 days ago
+                        </td>
+
+                        <td>
+                            <span class="healthy-status healthy">
+                                Healthy
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= AI ABOUT ================= -->
+
+    <section id="about" class="page-section about-section">
+
+        <div class="section-title">
+
+            <div>
+                <span class="eyebrow">TECHNOLOGY</span>
+                <h2>How Our AI Works</h2>
+            </div>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <div class="process-icon">
+                    📷
+                </div>
+
+                <h3>Image Upload</h3>
+
+                <p>
+                    User uploads a clear image of
+                    a plant leaf.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <div class="process-icon">
+                    ⚙️
+                </div>
+
+                <h3>Preprocessing</h3>
+
+                <p>
+                    OpenCV resizes and normalizes
+                    the image before prediction.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <div class="process-icon">
+                    🧠
+                </div>
+
+                <h3>CNN Analysis</h3>
+
+                <p>
+                    The trained CNN model analyzes
+                    visual features of the leaf.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <div class="process-icon">
+                    🎯
+                </div>
+
+                <h3>Prediction</h3>
+
+                <p>
+                    The system provides disease,
+                    confidence and recommendations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact" class="contact-section">
+
+        <div>
+
+            <span class="eyebrow">
+                GET IN TOUCH
+            </span>
+
+            <h2>
+                Have questions about PlantVision AI?
+            </h2>
+
+            <p>
+                Our system is designed to support smarter
+                and faster plant health analysis.
+            </p>
+
+        </div>
+
+        <button
+            class="primary-btn"
+            onclick="showNotification('Contact feature coming soon')">
+
+            Contact Us →
+
+        </button>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-brand">
+            🌿 PlantVision AI
+        </div>
+
+        <p>
+            AI-Based Plant Disease Detection Using Deep Learning
+        </p>
+
+        <p>
+            © 2026 PlantVision AI | MCA Mini Project
+        </p>
+
+    </footer>
+
+</main>
+
+
+<!-- ================= PROFILE MODAL ================= -->
+
+<div
+    class="modal"
+    id="profileModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeProfile()">
+
+            ×
+
+        </button>
+
+        <div class="large-avatar">
+            A
+        </div>
+
+        <h2>Guest User</h2>
+
+        <p>
+            PlantVision AI User
+        </p>
+
+        <div class="profile-stats">
+
+            <div>
+                <strong id="profileScans">128</strong>
+                <span>Scans</span>
+            </div>
+
+            <div>
+                <strong>96.8%</strong>
+                <span>Model Accuracy</span>
+            </div>
+
+        </div>
+
+        <button
+            class="primary-btn full"
+            onclick="closeProfile()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+
+    <span>✓</span>
+    <p id="toastText">Success</p>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+</html>
