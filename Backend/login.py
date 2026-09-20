@@ -63,7 +63,7 @@ def register_routes(app: Flask):
 
     # ------------------------------------------------------------- REGISTER
     @app.route("/account", methods=["GET", "POST"])
-    def register():
+    def account():
         if current_user.is_authenticated:
             return redirect(url_for("dashboard"))
 
