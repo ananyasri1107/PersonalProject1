@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ code }} | PlantAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f5faf6;
+            color: #163d28;
+            text-align: center;
+        }
+        h1 { font-size: 60px; color: #2e7d32; }
+        a { color: #2e7d32; font-weight: bold; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>{{ code }}</h1>
+    <p>{{ message }}</p>
+    <a href="{{ url_for('home') }}">← Back to Home</a>
+</body>
+</html>

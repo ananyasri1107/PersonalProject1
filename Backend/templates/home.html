@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantAI | AI-Based Plant Disease Detection</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+        <div class="logo">
+            🌿 <span>PlantAI</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#adminpanel">Admin Panel</a>
+            <a href="#feedback">Feedback</a>
+            <a href="#process">How It Works</a>
+            <a href="#contact">Contact</a>
+            <a href="#prediction">Prediction</a>
+        </nav>
+        <a href="{{ url_for('login') }}" class="login-btn">
+          Login
+          </a>
+
+
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <section class="hero" id="home">
+        <div class="moving-leaf leaf-1">🍃</div>
+        <div class="moving-leaf leaf-2">🍃</div>
+        <div class="moving-leaf leaf-3">🌿</div>
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🤖 AI + Deep Learning
+            </div>
+
+            <!-- MAIN PROJECT HEADING -->
+            <h1>
+                AI Based
+                <span>Plant Disease Detection</span>
+            </h1>
+
+            <p>
+                Protect your crops with Artificial Intelligence.
+                Upload a plant leaf image and our Deep Learning
+                system will identify possible diseases and provide
+                useful treatment recommendations.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('login') }}" class="primary-btn">
+                Start Detection →
+                </a>
+
+                <a href="#about"
+                   class="secondary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+            <div class="trust">
+
+                <div>
+                    <strong>96.8%</strong>
+                    <small>Model Accuracy</small>
+                </div>
+
+                <div>
+                    <strong>38+</strong>
+                    <small>Plant Classes</small>
+                </div>
+
+                <div>
+                    <strong>AI</strong>
+                    <small>Deep Learning</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= AI IMAGE CARD ================= -->
+
+        <div class="hero-image">
+
+            <div class="image-card">
+
+                <div class="scan-line"></div>
+
+                <div class="leaf-icon">
+                    🌿
+                </div>
+
+                <div class="ai-status">
+                    <span class="dot"></span>
+                    AI Model Ready
+                </div>
+
+                <div class="prediction">
+
+                    <div>
+                        <small>Sample Prediction</small>
+
+                        <h3>
+                            Tomato Early Blight
+                        </h3>
+                    </div>
+
+                    <strong>
+                        96%
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features-section" id="features">
+
+        <div class="section-heading">
+
+            <span>POWERFUL FEATURES</span>
+
+            <h2>
+                Smart Plant Disease Detection
+            </h2>
+
+            <p>
+                Our system combines image processing and deep
+                learning to help identify plant diseases quickly.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🤖
+                </div>
+
+                <h3>AI Detection</h3>
+
+                <p>
+                    CNN-based Deep Learning model analyzes plant
+                    leaf images and predicts possible diseases.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📷
+                </div>
+
+                <h3>Image Analysis</h3>
+
+                <p>
+                    Upload a clear leaf image and the system
+                    automatically processes it for prediction.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>Confidence Score</h3>
+
+                <p>
+                    Get the prediction along with a confidence
+                    score showing how reliable the result is.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💊
+                </div>
+
+                <h3>Treatment Advice</h3>
+
+                <p>
+                    Receive useful treatment and prevention
+                    recommendations for detected diseases.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section" id="about">
+
+        <div class="about-image">
+
+            <div class="about-card">
+                🌱
+            </div>
+
+        </div>
+
+
+        <div class="about-content">
+
+            <span>ABOUT OUR PROJECT</span>
+
+            <h2>
+                Helping Farmers Through
+                Artificial Intelligence
+            </h2>
+
+            <p>
+                Plant diseases can reduce crop quality and
+                production. Early identification can help
+                farmers take appropriate action.
+            </p>
+
+            <p>
+                Our AI-Based Plant Disease Detection system
+                uses Convolutional Neural Networks (CNN) to
+                analyze plant leaf images and identify diseases.
+            </p>
+
+            <div class="about-points">
+
+                <div>✓ Deep Learning based prediction</div>
+
+                <div>✓ PlantVillage dataset</div>
+
+                <div>✓ Image preprocessing using OpenCV</div>
+
+                <div>✓ Treatment and prevention information</div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOW IT WORKS ================= -->
+
+    <section class="process-section" id="process">
+
+        <div class="section-heading">
+
+            <span>SIMPLE PROCESS</span>
+
+            <h2>
+                How PlantAI Works
+            </h2>
+
+            <p>
+                Detect a plant disease in just a few simple steps.
+            </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="number">
+                    01
+                </div>
+
+                <h3>Login</h3>
+
+                <p>
+                    Login to your PlantAI account and access
+                    the disease detection dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">
+                    02
+                </div>
+
+                <h3>Upload Leaf</h3>
+
+                <p>
+                    Upload or select a clear image of the
+                    affected plant leaf.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">
+                    03
+                </div>
+
+                <h3>AI Analysis</h3>
+
+                <p>
+                    CNN model processes the image and
+                    identifies the disease.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="number">
+                    04
+                </div>
+
+                <h3>Get Result</h3>
+
+                <p>
+                    View disease name, confidence score,
+                    treatment and prevention information.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <div>
+
+            <h2>
+                Ready to Detect Plant Diseases?
+            </h2>
+
+            <p>
+                Start your AI-powered plant health analysis today.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('login') }}" class="primary-btn">
+          Start Detection →
+            </a>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact" id="contact">
+
+        <div>
+
+            <h2>PlantAI</h2>
+
+            <p>
+                AI-Based Plant Disease Detection using
+                Deep Learning.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>Project</h3>
+
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#process">How It Works</a>
+
+        </div>
+
+        <div>
+
+            <h3>Technology</h3>
+
+            <p>Python</p>
+            <p>TensorFlow / Keras</p>
+            <p>OpenCV</p>
+            <p>Flask</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 PlantAI | AI-Based Plant Disease Detection
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+</body>
+
+</html>
