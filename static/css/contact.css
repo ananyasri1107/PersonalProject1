@@ -1,0 +1,504 @@
+/* =========================================
+   PLANTVISION AI - CONTACT PAGE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #eef4f0;
+    color: #ffffff;
+}
+
+.contact-page {
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            rgba(238, 244, 240, 0.94),
+            rgba(238, 244, 240, 0.94)
+        );
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.contact-header {
+    height: 75px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #06271c;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: white;
+    text-decoration: none;
+}
+
+.logo-icon {
+    font-size: 30px;
+}
+
+.logo strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.logo small {
+    display: block;
+    color: #79a995;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border: 1px solid #3d6857;
+    border-radius: 9px;
+
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #0c9d58;
+    border-color: #0c9d58;
+}
+
+
+/* =========================================
+   MAIN
+   ========================================= */
+
+.contact-main {
+    padding: 45px 5%;
+}
+
+.contact-container {
+
+    max-width: 1150px;
+    min-height: 650px;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    background:
+        linear-gradient(
+            135deg,
+            #06271c,
+            #092f22
+        );
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px rgba(0, 45, 25, 0.25);
+}
+
+
+/* =========================================
+   LEFT CONTACT INFORMATION
+   ========================================= */
+
+.contact-info {
+    padding: 55px 50px;
+    position: relative;
+}
+
+.contact-info::after {
+    content: "";
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -120px;
+    bottom: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(19, 180, 100, 0.08);
+
+    pointer-events: none;
+}
+
+.eyebrow {
+    display: inline-block;
+
+    color: #16d278;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 14px;
+}
+
+.contact-info h1 {
+    font-size: 40px;
+    line-height: 1.2;
+
+    margin-bottom: 18px;
+
+    color: #ffffff;
+}
+
+.contact-info h1 span {
+    display: block;
+    color: #18d278;
+}
+
+.contact-description {
+    max-width: 480px;
+
+    color: #9eb7aa;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    margin-bottom: 42px;
+}
+
+
+/* =========================================
+   INFORMATION CARDS
+   ========================================= */
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.contact-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0cae60;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+}
+
+.contact-item h3 {
+    color: #ffffff;
+
+    font-size: 16px;
+
+    margin-bottom: 5px;
+}
+
+.contact-item p {
+    color: #91aa9e;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RIGHT FORM CARD
+   ========================================= */
+
+.contact-form-card {
+
+    background: rgba(255,255,255,0.035);
+
+    border-left: 1px solid rgba(255,255,255,0.12);
+
+    padding: 50px;
+}
+
+.form-header {
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #ffffff;
+
+    font-size: 27px;
+
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #91aa9e;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.contact-form {
+    width: 100%;
+}
+
+.form-group {
+    width: 100%;
+
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+/* INPUT */
+
+.form-group input {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 15px;
+
+    display: block;
+
+    background: #103a2b;
+
+    border: 1px solid #426b5b;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 14px;
+
+    transition: 0.25s;
+}
+
+
+/* TEXTAREA */
+
+.form-group textarea {
+    width: 100%;
+
+    min-height: 130px;
+
+    padding: 14px 15px;
+
+    display: block;
+
+    background: #103a2b;
+
+    border: 1px solid #426b5b;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 14px;
+
+    resize: vertical;
+
+    transition: 0.25s;
+}
+
+
+/* PLACEHOLDER */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #759589;
+}
+
+
+/* FOCUS */
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #18d278;
+
+    background: #124532;
+
+    box-shadow:
+        0 0 0 3px rgba(24, 210, 120, 0.10);
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+   ========================================= */
+
+.contact-submit-btn {
+
+    width: 100%;
+    height: 50px;
+
+    border: none;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #10b966,
+            #08a654
+        );
+
+    color: #ffffff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 8px 20px rgba(8, 166, 84, 0.25);
+}
+
+.contact-submit-btn:hover {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #16d878,
+            #0bb760
+        );
+
+    box-shadow:
+        0 12px 25px rgba(8, 166, 84, 0.35);
+}
+
+.contact-submit-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.contact-footer {
+
+    text-align: center;
+
+    padding: 25px 20px;
+
+    background: #06271c;
+
+    color: #8fa99d;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+.contact-footer strong {
+    color: #ffffff;
+}
+
+.contact-footer p {
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-card {
+        border-left: none;
+
+        border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .contact-info h1 {
+        font-size: 34px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .contact-header {
+        padding: 0 20px;
+    }
+
+    .contact-main {
+        padding: 20px 12px;
+    }
+
+    .contact-info {
+        padding: 35px 25px;
+    }
+
+    .contact-form-card {
+        padding: 30px 25px;
+    }
+
+    .contact-info h1 {
+        font-size: 30px;
+    }
+
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PlantVision AI | Contact Us</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/contact.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="contact-page">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="contact-header">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+
+            <span class="logo-icon">🌿</span>
+
+            <div>
+                <strong>PlantVision</strong>
+                <small>AI Agriculture</small>
+            </div>
+
+        </a>
+
+        <a href="{{ url_for('dashboard') }}" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- ================= CONTACT CONTENT ================= -->
+
+    <main class="contact-main">
+
+        <div class="contact-container">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="contact-info">
+
+                <span class="eyebrow">
+                    GET IN TOUCH
+                </span>
+
+                <h1>
+                    CONTACT
+                    <span>PlantVision AI</span>
+                </h1>
+
+                <p class="contact-description">
+
+                    Have questions about plant disease detection,
+                    AI analysis, or our project?
+
+                    Send us a message and our team will review
+                    your query.
+
+                </p>
+
+
+                <!-- INFORMATION CARDS -->
+
+                <div class="contact-details">
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            📧
+                        </div>
+
+                        <div>
+                            <h3>Email Support</h3>
+
+                            <p>
+                                Plant Disease Detection Support
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            🧠
+                        </div>
+
+                        <div>
+                            <h3>AI Support</h3>
+
+                            <p>
+                                AI & Deep Learning Based Detection
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            🎓
+                        </div>
+
+                        <div>
+                            <h3>Academic Project</h3>
+
+                            <p>
+                                MCA Mini Project
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE FORM -->
+
+            <div class="contact-form-card">
+
+                <div class="form-header">
+
+                    <span class="eyebrow">
+                        SEND MESSAGE
+                    </span>
+
+                    <h2>
+                        How can we help?
+                    </h2>
+
+                    <p>
+                        Fill in the details below to contact us.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('contact') }}"
+                    class="contact-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ current_user.full_name }}"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ current_user.email }}"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SUBJECT -->
+
+                    <div class="form-group">
+
+                        <label for="subject">
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder="Enter subject"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="contact-submit-btn"
+                    >
+
+                        📨 Send Message
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="contact-footer">
+
+        <div>
+            🌿 <strong>PlantVision AI</strong>
+        </div>
+
+        <p>
+            AI-Based Plant Disease Detection Using Deep Learning
+        </p>
+
+        <p>
+            © 2026 PlantVision AI | MCA Mini Project
+        </p>
+
+    </footer>
+
+</div>
+<script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+
+</body>
+
+
+</html>

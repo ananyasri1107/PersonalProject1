@@ -6,27 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>PlantVision AI | Plant Disease Detection</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
+          <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/contact.css') }}">
 </head>
 
 <body>
+<div class="background"></div>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
 
 <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-        <div class="brand-icon">🌿</div>
+
+        <div class="brand-icon">
+            🌿
+        </div>
 
         <div>
-            <h2>PlantVision</h2>
+            <h2>    <p class="highlight" style="font-weight: 700; color: #C2185B;">
+        PlantVision
+            </p></h2>
             <span>AI Agriculture</span>
         </div>
+
     </div>
+
 
     <nav>
 
@@ -40,8 +53,7 @@
             Disease Detection
         </a>
 
-        <a href="#history" class="nav-item">
-            <span>📋</span>
+        <a href="{{ url_for('scan_history') }}">
             Scan History
         </a>
 
@@ -50,29 +62,59 @@
             About AI
         </a>
 
+        <!-- CONTACT -->
         <a href="#contact" class="nav-item">
-            <span>✉</span>
-            Contact
+                <span>✉</span>
+                   Contact
+                  </a>
+
+
+        <!-- ADMIN PANEL -->
+        {% if current_user.is_authenticated and current_user.is_admin %}
+
+        <a href="{{ url_for('admin_panel') }}" class="nav-item">
+            <span>🛠️</span>
+            Admin Panel
         </a>
 
+        {% endif %}
+
     </nav>
+
 
     <div class="sidebar-bottom">
 
         <button class="theme-btn" onclick="toggleTheme()">
-            <span id="themeIcon">🌙</span>
-            <span>Dark Mode</span>
+
+            <span id="themeIcon">
+                🌙
+            </span>
+
+            <span>
+                Dark Mode
+            </span>
+
         </button>
 
-        <button class="profile-mini" onclick="openProfile()">
+
+        <button
+            class="profile-mini"
+            onclick="openProfile()">
 
             <div class="avatar">
-                A
+                {{ current_user.full_name[0]|upper }}
             </div>
 
             <div>
-                <strong>Guest User</strong>
-                <small>View Profile</small>
+
+                <strong>
+                    {{ current_user.full_name }}
+                </strong>
+
+                <small>
+                    View Profile
+                </small>
+
             </div>
 
         </button>
@@ -82,36 +124,65 @@
 </aside>
 
 
-<!-- ================= MAIN ================= -->
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="main">
 
-    <!-- TOP BAR -->
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
 
     <header class="topbar">
 
-        <button class="menu-btn" onclick="toggleSidebar()">
+        <button
+            class="menu-btn"
+            onclick="toggleSidebar()">
+
             ☰
+
         </button>
 
+
         <div class="search">
+
             🔎
+
             <input
                 type="text"
                 placeholder="Search diseases, plants..."
             >
+
         </div>
+
 
         <div class="top-actions">
 
-            <button class="icon-btn" onclick="showNotification('No new notifications')">
+            <button
+                class="icon-btn"
+                onclick="showNotification('No new notifications')">
+
                 🔔
+
                 <span class="notification-dot"></span>
+
             </button>
 
-            <button class="profile-btn" onclick="openProfile()">
-                <div class="avatar">A</div>
-                <span>Guest</span>
+
+            <button
+                class="profile-btn"
+                onclick="openProfile()">
+
+                <div class="avatar">
+                    {{ current_user.full_name[0]|upper }}
+                </div>
+
+                <span>
+                    {{ current_user.full_name }}
+                </span>
+
             </button>
 
         </div>
@@ -119,9 +190,13 @@
     </header>
 
 
-    <!-- ================= DASHBOARD ================= -->
+    <!-- =====================================================
+         DASHBOARD
+    ====================================================== -->
 
-    <section id="dashboard" class="page-section">
+    <section
+        id="dashboard"
+        class="page-section">
 
         <div class="welcome">
 
@@ -132,40 +207,72 @@
                 </p>
 
                 <h1>
-                    Plant Health
+                    <p class="highlight" style="font-weight: 700; color: #C2185B;">Plant Health</p>
+                 
                     <span>Dashboard</span>
                 </h1>
 
-                <p>
+                <p class="welcome-text"style="font-weight: 500; color: yellow;">
                     Detect plant diseases using Artificial Intelligence
                     and Deep Learning technology.
                 </p>
 
             </div>
 
-            <button
-                class="primary-btn"
-                onclick="scrollToDetection()">
 
-                + New Scan
+            <div class="welcome-buttons">
 
-            </button>
+                <!-- NEW SCAN -->
+
+                <button
+                    class="primary-btn"
+                    onclick="scrollToDetection()">
+
+                    + New Scan
+
+                </button>
+
+
+                <!-- CONTACT US -->
+            <a
+                href="#contact"
+                    class="primary-btn contact-btn">
+
+                    ✉ Contact Us
+
+                </a>
+
+           </div>
 
         </div>
 
 
-        <!-- STATISTICS -->
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
 
         <div class="stats-grid">
 
             <div class="stat-card">
 
-                <div class="stat-icon">🔬</div>
+                <div class="stat-icon">
+                    🔬
+                </div>
 
                 <div>
-                    <span>Total Scans</span>
-                    <h2 id="totalScans">128</h2>
-                    <small class="positive">↑ 12% this month</small>
+
+                    <span style="color: black;">
+                        Total Scans
+                    </span>
+
+                    <h2 id="totalScans">
+                        {{ total_predictions }}
+                    </h2>
+
+                    <small class="positive">
+                        AI Analysis
+                    </small>
+
                 </div>
 
             </div>
@@ -173,12 +280,24 @@
 
             <div class="stat-card">
 
-                <div class="stat-icon">🎯</div>
+                <div class="stat-icon">
+                    🎯
+                </div>
 
                 <div>
-                    <span>Model Accuracy</span>
-                    <h2>96.8%</h2>
-                    <small class="positive">CNN Model</small>
+
+                    <span style="color: black;">
+                        Model Accuracy
+                    </span>
+
+                    <h2>
+                        96.8%
+                    </h2>
+
+                    <small class="positive">
+                        CNN Model
+                    </small>
+
                 </div>
 
             </div>
@@ -186,12 +305,24 @@
 
             <div class="stat-card">
 
-                <div class="stat-icon">🌱</div>
+                <div class="stat-icon">
+                    🌱
+                </div>
 
                 <div>
-                    <span>Plant Classes</span>
-                    <h2>38</h2>
-                    <small>PlantVillage Dataset</small>
+
+                    <span style="color: black;">
+                        Plant Classes
+                    </span>
+
+                    <h2>
+                        38
+                    </h2>
+
+                    <small style="color: green;">
+                        PlantVillage Dataset
+                    </small>
+
                 </div>
 
             </div>
@@ -199,12 +330,24 @@
 
             <div class="stat-card">
 
-                <div class="stat-icon">🦠</div>
+                <div class="stat-icon">
+                    🦠
+                </div>
 
                 <div>
-                    <span>Diseases Detected</span>
-                    <h2>26</h2>
-                    <small>Multiple categories</small>
+
+                    <span style="color: black;">
+                        Diseases Detected
+                    </span>
+
+                    <h2>
+                        {{ diseased_count }}
+                    </h2>
+
+                    <small style="color: green; font-weight: 700;">
+                        Your Scan History
+                    </small>
+
                 </div>
 
             </div>
@@ -212,9 +355,14 @@
         </div>
 
 
-        <!-- DASHBOARD CARDS -->
+        <!-- =================================================
+             DASHBOARD CARDS
+        ================================================== -->
 
         <div class="dashboard-grid">
+
+
+            <!-- AI CARD -->
 
             <div class="info-card ai-card">
 
@@ -245,6 +393,7 @@
 
                 </div>
 
+
                 <div class="ai-visual">
                     🧠
                 </div>
@@ -252,47 +401,93 @@
             </div>
 
 
+            <!-- MODEL CARD -->
+
             <div class="info-card model-card">
 
                 <div class="card-heading">
 
                     <div>
-                        <span class="eyebrow">MODEL STATUS</span>
-                        <h3>CNN Deep Learning</h3>
+
+                        <span class="eyebrow">
+                            MODEL STATUS
+                        </span>
+
+                        <h3>
+                        <p class="highlight" style="color : black;"> CNN Deep Learning</p>
+                        </h3>
+
                     </div>
 
-                    <span class="status">● Active</span>
+                    <span class="status">
+                        ● Active
+                    </span>
 
                 </div>
+
 
                 <div class="model-progress">
 
                     <div class="progress-label">
-                        <span>Accuracy</span>
-                        <strong>96.8%</strong>
+
+                        <span  style="color: #18A45B; font-weight: 700;">
+                            Accuracy
+                        </span>
+
+                        <strong>
+                            96.8%
+                        </strong>
+
                     </div>
 
+
                     <div class="progress">
+
                         <div style="width:96.8%"></div>
+
                     </div>
 
                 </div>
 
+
                 <div class="model-details">
 
                     <div>
-                        <span>Framework</span>
-                        <strong>TensorFlow</strong>
+
+                        <span  style="color: #18A45B; font-weight: 700;">
+                            Framework
+                        </span>
+
+                        <strong style="color:red; font-weight: 700;">
+                            TensorFlow
+                        </strong>
+
                     </div>
 
-                    <div>
-                        <span>Architecture</span>
-                        <strong>CNN</strong>
-                    </div>
 
                     <div>
-                        <span>Dataset</span>
-                        <strong>PlantVillage</strong>
+
+                        <span style="color: #18A45B; font-weight: 700;">
+                            Architecture
+                        </span>
+
+                        <strong style="color:red; font-weight: 700;">
+                            CNN
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span style="color:green;">
+                            Dataset
+                        </span>
+
+                        <strong style="color:red;">
+                            PlantVillage
+                        </strong>
+
                     </div>
 
                 </div>
@@ -304,27 +499,42 @@
     </section>
 
 
-    <!-- ================= DETECTION ================= -->
+    <!-- =====================================================
+         DETECTION
+    ====================================================== -->
 
-    <section id="detect" class="page-section detection-section">
+    <section
+        id="detect"
+        class="page-section detection-section">
 
         <div class="section-title">
 
             <div>
-                <span class="eyebrow">AI ANALYSIS</span>
+
+                <span class="eyebrow">
+                    AI ANALYSIS
+                </span>
 
                 <h2>
+                    <p class="eyebrow" style="color: #2196F3;">
                     Detect Plant Disease
-                </h2>
+                </p>
+            </h2>
 
-                <p>
+
+                <p class="highlight" style="font-weight: 700; color:black;">
                     Upload a clear image of a plant leaf for analysis.
                 </p>
+
             </div>
 
+
             <div class="ai-status">
+
                 <span></span>
+
                 AI Ready
+
             </div>
 
         </div>
@@ -332,15 +542,15 @@
 
         <div class="detection-grid">
 
-            <!-- UPLOAD -->
+
+            <!-- UPLOAD CARD -->
 
             <div class="upload-card">
 
                 <div
                     class="drop-zone"
                     id="dropZone"
-                    onclick="document.getElementById('imageInput').click()"
-                >
+                    onclick="document.getElementById('imageInput').click()">
 
                     <div class="upload-animation">
 
@@ -350,6 +560,7 @@
 
                     </div>
 
+
                     <h3>
                         Drop your leaf image here
                     </h3>
@@ -358,33 +569,54 @@
                         or click to browse from your device
                     </p>
 
+
                     <div class="file-types">
                         JPG • JPEG • PNG
                     </div>
 
-                    <input
-                        type="file"
-                        id="imageInput"
-                        accept="image/png,image/jpeg,image/jpg"
-                        hidden
-                    >
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('predict') }}"
+                        enctype="multipart/form-data"
+                        id="predictionForm">
+
+                        <input
+                            type="file"
+                            name="leaf_image"
+                            id="imageInput"
+                            accept=".png,.jpg,.jpeg,.webp"
+                            hidden
+                            required
+                        >
+
+                    </form>
 
                 </div>
 
 
                 <!-- PREVIEW -->
 
-                <div class="preview-container" id="previewContainer">
+                <div
+                    class="preview-container"
+                    id="previewContainer">
 
                     <div class="preview-header">
 
-                        <strong>Image Preview</strong>
+                        <strong>
+                            Image Preview
+                        </strong>
 
-                        <button onclick="removeImage()">
+                        <button
+                            type="button"
+                            onclick="removeImage()">
+
                             ✕
+
                         </button>
 
                     </div>
+
 
                     <div class="preview-wrapper">
 
@@ -403,12 +635,18 @@
                 </div>
 
 
+                <!-- ANALYZE BUTTON -->
+
                 <button
+                    type="button"
                     class="detect-main-btn"
                     id="detectButton"
-                    onclick="startDetection()">
+                    onclick="submitPrediction()">
 
-                    <span>🧠</span>
+                    <span>
+                        🧠
+                    </span>
+
                     Analyze With AI
 
                 </button>
@@ -416,7 +654,9 @@
             </div>
 
 
-            <!-- RESULT -->
+            <!-- =================================================
+                 RESULT
+            ================================================== -->
 
             <div class="result-card">
 
@@ -428,20 +668,164 @@
                             AI PREDICTION
                         </span>
 
-                        <h3>Analysis Result</h3>
+                        <h3>
+                            Analysis Result
+                        </h3>
 
                     </div>
+
 
                     <span
                         class="result-status"
                         id="resultStatus">
 
-                        Waiting
+                        {% if result %}
+                            Completed
+                        {% else %}
+                            Waiting
+                        {% endif %}
 
                     </span>
 
                 </div>
 
+
+                {% if result %}
+
+                <div
+                    class="result-content"
+                    id="resultContent">
+
+                    <div class="disease-title">
+
+                        <div class="disease-icon">
+
+                            {% if result.is_healthy %}
+                                🌿
+                            {% else %}
+                                🦠
+                            {% endif %}
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                DETECTED RESULT
+                            </span>
+
+                            <h2 id="diseaseName">
+                                {{ result.disease_name }}
+                            </h2>
+
+                            <small>
+                                {{ result.plant_name }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="confidence-section">
+
+                        <div class="confidence-heading">
+
+                            <span>
+                                Confidence Score
+                            </span>
+
+                            <strong id="confidenceText">
+                                {{ "%.2f"|format(result.confidence * 100) }}%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="confidence-bar">
+
+                            <div
+                                id="confidenceProgress"
+                                style="width: {{ result.confidence * 100 }}%">
+                            </div>
+
+                        </div>
+
+
+                        <small>
+                            AI model confidence
+                        </small>
+
+                    </div>
+
+
+                    <div class="disease-info">
+
+                        <h4>
+                            🦠 Disease Information
+                        </h4>
+
+                        <p id="diseaseDescription">
+
+                            AI prediction generated by
+                            the trained CNN model.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="recommendations">
+
+                        <div class="recommendation">
+
+                            <div class="rec-icon">
+                                💊
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Treatment
+                                </h4>
+
+                                <p id="treatment">
+                                    Follow recommended plant
+                                    disease management practices.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="recommendation">
+
+                            <div class="rec-icon">
+                                🛡️
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Prevention
+                                </h4>
+
+                                <p id="prevention">
+                                    Maintain healthy growing
+                                    conditions and monitor plants regularly.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% else %}
 
                 <div
                     class="result-empty"
@@ -462,134 +846,7 @@
 
                 </div>
 
-
-                <!-- RESULT CONTENT -->
-
-                <div
-                    class="result-content"
-                    id="resultContent">
-
-                    <div class="disease-title">
-
-                        <div class="disease-icon">
-                            🍅
-                        </div>
-
-                        <div>
-
-                            <span>
-                                DETECTED DISEASE
-                            </span>
-
-                            <h2 id="diseaseName">
-                                Tomato Early Blight
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- CONFIDENCE -->
-
-                    <div class="confidence-section">
-
-                        <div class="confidence-heading">
-
-                            <span>Confidence Score</span>
-
-                            <strong id="confidenceText">
-                                95.4%
-                            </strong>
-
-                        </div>
-
-                        <div class="confidence-bar">
-
-                            <div
-                                id="confidenceProgress"
-                                style="width:0%">
-                            </div>
-
-                        </div>
-
-                        <small>
-                            High confidence prediction
-                        </small>
-
-                    </div>
-
-
-                    <!-- DISEASE INFO -->
-
-                    <div class="disease-info">
-
-                        <h4>
-                            🦠 Disease Information
-                        </h4>
-
-                        <p id="diseaseDescription">
-
-                            Early blight is a fungal disease
-                            that commonly affects tomato leaves,
-                            causing dark spots and yellowing.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- TREATMENT -->
-
-                    <div class="recommendations">
-
-                        <div class="recommendation">
-
-                            <div class="rec-icon">
-                                💊
-                            </div>
-
-                            <div>
-                                <h4>Treatment</h4>
-
-                                <p id="treatment">
-                                    Remove infected leaves and
-                                    apply an appropriate fungicide.
-                                </p>
-                            </div>
-
-                        </div>
-
-
-                        <div class="recommendation">
-
-                            <div class="rec-icon">
-                                🛡️
-                            </div>
-
-                            <div>
-                                <h4>Prevention</h4>
-
-                                <p id="prevention">
-                                    Maintain proper plant spacing
-                                    and avoid excessive leaf moisture.
-                                </p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="secondary-btn"
-                        onclick="saveScan()">
-
-                        💾 Save Result
-
-                    </button>
-
-                </div>
+                {% endif %}
 
             </div>
 
@@ -598,24 +855,27 @@
     </section>
 
 
-    <!-- ================= HISTORY ================= -->
+    <!-- =====================================================
+         HISTORY
+    ====================================================== -->
 
-    <section id="history" class="page-section">
+    <section
+        id="history"
+        class="page-section">
 
         <div class="section-title">
 
             <div>
-                <span class="eyebrow">ACTIVITY</span>
-                <h2>Recent Scan History</h2>
+
+                <span class="eyebrow">
+                    ACTIVITY
+                </span>
+
+                <h2>
+                    <p class="highlight"style="font-weight: bold;color: #1565C0";>Scan History</p>
+                </h2>
+
             </div>
-
-            <button
-                class="secondary-btn"
-                onclick="clearHistory()">
-
-                Clear History
-
-            </button>
 
         </div>
 
@@ -627,89 +887,99 @@
                 <thead>
 
                     <tr>
-                        <th>Plant</th>
-                        <th>Prediction</th>
-                        <th>Confidence</th>
-                        <th>Date</th>
-                        <th>Status</th>
+
+                        <th style="color: #18A45B; font-weight: 700;" >
+                            Plant
+                        </th>
+
+                        <th style="color: #18A45B;font-weight: 700;">
+                            Prediction
+                        </th>
+
+                        <th style="color: #18A45B; font-weight: 700;">
+                            Confidence
+                        </th>
+
+                        <th style="color: #18A45B; font-weight: 700;">
+                            Date
+                        </th>
+
+                        <th style="color: #18A45B; font-weight: 700;">
+                            Status
+                        </th>
+
                     </tr>
 
                 </thead>
 
+
                 <tbody id="historyTable">
 
+                    {% for item in predictions %}
+
                     <tr>
 
-                        <td>🍅 Tomato</td>
-
                         <td>
-                            Early Blight
+                            🌿 {{ item.plant_name }}
                         </td>
 
                         <td>
-                            <strong>95.4%</strong>
+                            {{ item.disease_name }}
                         </td>
 
                         <td>
-                            Today
+                            <strong>
+                                {{ "%.2f"|format(item.confidence * 100) }}%
+                            </strong>
                         </td>
 
                         <td>
-                            <span class="healthy-status">
-                                Detected
-                            </span>
+
+                            {% if item.created_at %}
+
+                                {{ item.created_at.strftime("%d %b %Y") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if item.is_healthy %}
+
+                                <span class="healthy-status healthy">
+                                    Healthy
+                                </span>
+
+                            {% else %}
+
+                                <span class="healthy-status">
+                                    Detected
+                                </span>
+
+                            {% endif %}
+
                         </td>
 
                     </tr>
 
+                    {% else %}
+
                     <tr>
 
-                        <td>🥔 Potato</td>
+                        <td colspan="5">
 
-                        <td>
-                            Late Blight
-                        </td>
+                            No scan history available.
 
-                        <td>
-                            <strong>92.1%</strong>
-                        </td>
-
-                        <td>
-                            Yesterday
-                        </td>
-
-                        <td>
-                            <span class="healthy-status">
-                                Detected
-                            </span>
                         </td>
 
                     </tr>
 
-                    <tr>
-
-                        <td>🌽 Corn</td>
-
-                        <td>
-                            Healthy
-                        </td>
-
-                        <td>
-                            <strong>98.2%</strong>
-                        </td>
-
-                        <td>
-                            2 days ago
-                        </td>
-
-                        <td>
-                            <span class="healthy-status healthy">
-                                Healthy
-                            </span>
-
-                        </td>
-
-                    </tr>
+                    {% endfor %}
 
                 </tbody>
 
@@ -720,21 +990,35 @@
     </section>
 
 
-    <!-- ================= AI ABOUT ================= -->
+    <!-- =====================================================
+         AI ABOUT
+    ====================================================== -->
 
-    <section id="about" class="page-section about-section">
+    <section
+        id="about"
+        class="page-section about-section">
 
         <div class="section-title">
 
             <div>
-                <span class="eyebrow">TECHNOLOGY</span>
-                <h2>How Our AI Works</h2>
+
+                <span class="eyebrow">
+                    TECHNOLOGY
+                </span>
+
+                <h2>
+                    <p class="highlight" style="font-weight: 700; color: #1565C0;">
+                How Our AI Works
+                </p>
+                </h2>
+
             </div>
 
         </div>
 
 
         <div class="process-grid">
+
 
             <div class="process-card">
 
@@ -746,9 +1030,11 @@
                     📷
                 </div>
 
-                <h3>Image Upload</h3>
+                <h3 >
+                   <p style="color: #18A45B;font-weight: 700; "> Image Upload</p>
+                </h3>
 
-                <p>
+                <p style="color:black;font-weight: 700;">
                     User uploads a clear image of
                     a plant leaf.
                 </p>
@@ -766,11 +1052,13 @@
                     ⚙️
                 </div>
 
-                <h3>Preprocessing</h3>
+                <h3>
+                   <p style="color: #18A45B;font-weight: 700; "> Preprocessing</p>
+                </h3>
 
-                <p>
-                    OpenCV resizes and normalizes
-                    the image before prediction.
+                <p style="color: black;font-weight: 700;">
+                    Image is resized and prepared
+                    before prediction.
                 </p>
 
             </div>
@@ -786,9 +1074,11 @@
                     🧠
                 </div>
 
-                <h3>CNN Analysis</h3>
+                <h3>
+                    <p style="color: #18A45B;font-weight: 700; "> CNN Analysis</p>
+                </h3>
 
-                <p>
+                <p style="color: black;font-weight: 700;">
                     The trained CNN model analyzes
                     visual features of the leaf.
                 </p>
@@ -806,9 +1096,11 @@
                     🎯
                 </div>
 
-                <h3>Prediction</h3>
+                <h3>
+                   <p style="color: #18A45B;font-weight: 700; "> Prediction</p>
+                </h3>
 
-                <p>
+                <p style="color: black;font-weight: 700;">
                     The system provides disease,
                     confidence and recommendations.
                 </p>
@@ -820,39 +1112,214 @@
     </section>
 
 
-    <!-- ================= CONTACT ================= -->
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
 
-    <section id="contact" class="contact-section">
+    <section
+        id="contact"
+        class="contact-section">
 
-        <div>
+        <div class="contact-container">
 
-            <span class="eyebrow">
-                GET IN TOUCH
-            </span>
 
-            <h2>
-                Have questions about PlantVision AI?
-            </h2>
+            <!-- CONTACT INFORMATION -->
 
-            <p>
-                Our system is designed to support smarter
-                and faster plant health analysis.
-            </p>
+            <div class="contact-info">
+
+                <span class="eyebrow">
+                    GET IN TOUCH
+                </span>
+
+                <h2>
+                    Contact PlantVision AI
+                </h2>
+
+                <p>
+                    Have questions about plant disease detection,
+                    AI analysis or our project?
+                </p>
+
+
+                <!-- CONTACT US BUTTON -->
+
+
+                <a href="#contact" class="nav-item">
+                    <span>✉</span>
+                        Contact
+                    </a>
+
+
+                <div class="contact-details">
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            📧
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Email
+                            </strong>
+
+                            <p>
+                                support@plantvisionai.com
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            🧠
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                AI Support
+                            </strong>
+
+                            <p>
+                                Plant Disease Detection
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-icon">
+                            🎓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Project
+                            </strong>
+
+                            <p>
+                                MCA Mini Project
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTACT FORM -->
+
+            <div class="contact-form-card">
+
+                <form
+                    method="POST"
+                    action="{{ url_for('contact') }}"
+                    class="contact-form">
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                value="{{ current_user.full_name }}"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                value="{{ current_user.email }}"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            name="subject"
+                            placeholder="Enter subject"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <textarea
+                            name="message"
+                            rows="6"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        Send Message →
+
+                    </button>
+
+                </form>
+
+            </div>
 
         </div>
-
-        <button
-            class="primary-btn"
-            onclick="showNotification('Contact feature coming soon')">
-
-            Contact Us →
-
-        </button>
 
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer>
 
@@ -873,7 +1340,9 @@
 </main>
 
 
-<!-- ================= PROFILE MODAL ================= -->
+<!-- =========================================================
+     PROFILE MODAL
+========================================================= -->
 
 <div
     class="modal"
@@ -889,29 +1358,53 @@
 
         </button>
 
+
         <div class="large-avatar">
-            A
+
+            {{ current_user.full_name[0]|upper }}
+
         </div>
 
-        <h2>Guest User</h2>
+
+        <h2>
+            {{ current_user.full_name }}
+        </h2>
+
 
         <p>
-            PlantVision AI User
+            {{ current_user.email }}
         </p>
+
 
         <div class="profile-stats">
 
             <div>
-                <strong id="profileScans">128</strong>
-                <span>Scans</span>
+
+                <strong>
+                    {{ total_predictions }}
+                </strong>
+
+                <span>
+                    Scans
+                </span>
+
             </div>
 
+
             <div>
-                <strong>96.8%</strong>
-                <span>Model Accuracy</span>
+
+                <strong>
+                    96.8%
+                </strong>
+
+                <span>
+                    Model Accuracy
+                </span>
+
             </div>
 
         </div>
+
 
         <button
             class="primary-btn full"
@@ -926,19 +1419,83 @@
 </div>
 
 
-<!-- TOAST -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
 <div
     id="toast"
     class="toast">
 
-    <span>✓</span>
-    <p id="toastText">Success</p>
+    <span>
+        ✓
+    </span>
+
+    <p id="toastText">
+        Success
+    </p>
 
 </div>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
+
+<script>
+
+    /* =====================================================
+       CONTACT BUTTON
+    ====================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const contactButtons =
+                document.querySelectorAll(
+                    ".contact-btn, .contact-main-btn"
+                );
+
+            contactButtons.forEach(
+                function (button) {
+
+                    button.style.cursor = "pointer";
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       REAL AI PREDICTION SUBMIT
+    ====================================================== */
+
+    function submitPrediction() {
+
+        const input =
+            document.getElementById("imageInput");
+
+        if (!input.files || input.files.length === 0) {
+
+            alert("Please select a plant leaf image first.");
+
+            return;
+
+        }
+
+        document
+            .getElementById("predictionForm")
+            .submit();
+
+    }
+
+</script>
+
 </body>
-</html>
+</html>  

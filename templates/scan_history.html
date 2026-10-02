@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantVision AI | Scan History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/scan_history.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<div class="history-page">
+
+    <!-- HEADER -->
+    <header class="history-header">
+
+        <div class="brand">
+            <div class="brand-icon">🌿</div>
+
+            <div>
+                <h2>PlantVision</h2>
+                <span>AI Agriculture</span>
+            </div>
+        </div>
+
+        <div class="header-right">
+
+            <a href="{{ url_for('dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <div class="user-avatar">
+                {{ current_user.full_name[0] }}
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="history-content">
+
+        <div class="page-heading">
+
+            <div>
+                <h1>Scan History</h1>
+
+                <p>
+                    View and manage your previous plant disease scans.
+                </p>
+            </div>
+
+            <a href="{{ url_for('dashboard') }}" class="new-scan-btn">
+                + New Scan
+            </a>
+
+        </div>
+
+
+        <!-- STAT CARDS -->
+        <div class="history-stats">
+
+            <div class="stat-card">
+                <div class="stat-icon">🔍</div>
+
+                <div>
+                    <span>Total Scans</span>
+                    <strong>{{ predictions|length }}</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card healthy-card">
+                <div class="stat-icon">🌱</div>
+
+                <div>
+                    <span>Healthy Plants</span>
+
+                    <strong>
+                        {{ predictions|selectattr('is_healthy', 'equalto', true)|list|length }}
+                    </strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card disease-card">
+                <div class="stat-icon">⚠️</div>
+
+                <div>
+                    <span>Diseased Plants</span>
+
+                    <strong>
+                        {{ predictions|selectattr('is_healthy', 'equalto', false)|list|length }}
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- HISTORY TABLE -->
+        <div class="history-card">
+
+            <div class="table-header">
+
+                <div>
+                    <h2>Recent Scans</h2>
+                    <p>Your latest plant analysis results</p>
+                </div>
+
+            </div>
+
+
+            {% if predictions %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Plant</th>
+                            <th>Image</th>
+                            <th>Result</th>
+                            <th>Confidence</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for prediction in predictions %}
+
+                        <tr>
+
+                            <!-- PLANT / DISEASE -->
+                            <td>
+                                <div class="plant-info">
+
+                                    <div class="plant-icon">
+                                        🌿
+                                    </div>
+
+                                    <div>
+                                        <strong>
+                                            {{ prediction.disease_name }}
+                                        </strong>
+
+                                        {% if prediction.is_healthy %}
+                                            <small>Healthy Plant</small>
+                                        {% else %}
+                                            <small>Disease Detected</small>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </td>
+
+
+                            <!-- IMAGE -->
+                            <td>
+
+                                {% if prediction.image_filename %}
+
+                                <img
+                                    src="{{ url_for('static',
+                                    filename='uploads/' + prediction.image_filename) }}"
+                                    class="plant-image"
+                                    alt="Plant Scan">
+
+                                {% else %}
+
+                                <div class="no-image">
+                                    🌱
+                                </div>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- RESULT -->
+                            <td>
+
+                                {% if prediction.is_healthy %}
+
+                                    <span class="status healthy">
+                                        ✓ Healthy
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status diseased">
+                                        ⚠ Disease
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- CONFIDENCE -->
+                            <td>
+
+                                <div class="confidence">
+
+                                    <div class="confidence-bar">
+
+                                        <div
+                                            class="confidence-fill"
+                                            style="width: {{ prediction.confidence }}%;">
+                                        </div>
+
+                                    </div>
+
+                                    <span>
+                                        {{ "%.1f"|format(prediction.confidence) }}%
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- DATE -->
+                            <td>
+
+                                <span class="scan-date">
+
+                                    {{ prediction.created_at.strftime('%d %b %Y') }}
+
+                                    <small>
+                                        {{ prediction.created_at.strftime('%I:%M %p') }}
+                                    </small>
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🌱
+                </div>
+
+                <h2>No Scan History</h2>
+
+                <p>
+                    You haven't scanned any plant images yet.
+                </p>
+
+                <a href="{{ url_for('dashboard') }}" class="new-scan-btn">
+                    Start Your First Scan
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+<script src="{{ url_for('static', filename='js/scan_history.js') }}"></script>
+</body>
+</html>

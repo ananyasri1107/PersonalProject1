@@ -361,3 +361,15 @@ body {
         padding: 35px 25px;
     }
 }
+/*Forgot Password*/
+.login-options {
+    position: relative;
+    z-index: 9999;
+}
+
+.login-options a {
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}

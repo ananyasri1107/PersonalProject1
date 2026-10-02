@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Login | Plant Disease Detection</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 
 <body>
@@ -51,23 +52,28 @@
                 Login to continue to your dashboard
             </p>
 
+
             <!-- Login Form -->
-          <form action="{{ url_for('login') }}" method="POST"></form>
+            <form action="{{ url_for('login') }}" method="POST">
 
                 <div class="input-group">
-                    <label>Email</label>
+
+                    <label for="email">Email</label>
 
                     <input
                         type="email"
+                        id="email"
                         name="email"
                         placeholder="Enter your email"
                         required
                     >
+
                 </div>
 
 
                 <div class="input-group">
-                    <label>Password</label>
+
+                    <label for="password">Password</label>
 
                     <input
                         type="password"
@@ -83,13 +89,14 @@
                     >
                         👁
                     </span>
+
                 </div>
 
 
                 <div class="login-options">
 
                     <label>
-                        <input type="checkbox">
+                        <input type="checkbox" name="remember">
                         Remember me
                     </label>
 
@@ -105,25 +112,33 @@
             </form>
 
 
+            <!-- Divider -->
             <div class="divider">
                 <span>OR</span>
             </div>
 
 
-            <button class="guest-btn" onclick="continueAsGuest()">
+            <!-- Guest Login -->
+            <button
+                type="button"
+                class="guest-btn"
+                onclick="continueAsGuest()"
+            >
                 Continue as Guest
             </button>
 
 
+            <!-- Register -->
             <p class="register-text">
                 Don't have an account?
-                <a href="account.html">
+                <a href="{{ url_for('account') }}">
                     Create Account
                 </a>
             </p>
 
 
-            <a href="home.html">
+            <!-- Back to Home -->
+            <a href="{{ url_for('home') }}">
                 ← Back to Home
             </a>
 
@@ -132,8 +147,8 @@
     </div>
 
 
+    <!-- JavaScript -->
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
-    
 
 </body>
 </html>

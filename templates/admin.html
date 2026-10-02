@@ -1,0 +1,1546 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PlantAI - Admin Panel</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background"></div>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        <span>🌿</span>
+        <h2>Plant<span>AI</span></h2>
+    </div>
+
+
+    <div class="admin-profile">
+
+        <div class="profile-img">
+            👨‍💼
+        </div>
+
+        <div>
+            <h4>Admin</h4>
+            <p>Administrator</p>
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="#dashboard" class="nav-item active">
+            <span>📊</span>
+            Dashboard
+        </a>
+
+        <a href="#users" class="nav-item">
+            <span>👥</span>
+            Users
+        </a>
+
+        <a href="#scans" class="nav-item">
+            <span>🔬</span>
+            Disease Scans
+        </a>
+
+        <a href="#diseases" class="nav-item">
+            <span>🌱</span>
+            Diseases
+        </a>
+
+        <a href="#feedback" class="nav-item">
+            <span>💬</span>
+            Feedback
+        </a>
+
+        <a href="#reports" class="nav-item">
+            <span>📈</span>
+            Reports
+        </a>
+
+        <a href="#settings" class="nav-item">
+            <span>⚙️</span>
+            Settings
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/">
+            🏠 Back to Website
+        </a>
+
+        <a href="{{ url_for('logout') }}" class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button class="menu-btn"
+                    onclick="toggleSidebar()">
+                ☰
+            </button>
+
+            <div>
+
+                <p class="small-title">
+                    ADMIN PANEL
+                </p>
+
+                <h1>Dashboard</h1>
+
+            </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <button class="notification"
+                    onclick="showNotification()">
+
+                🔔
+                <span>3</span>
+
+            </button>
+
+
+            <div class="top-profile">
+
+                <div class="top-avatar">
+                    A
+                </div>
+
+                <div>
+
+                    <strong>Admin</strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================== -->
+
+    <section id="dashboard"
+             class="page-section">
+
+        <div class="welcome">
+
+            <div>
+
+                <p class="section-label">
+                    SYSTEM OVERVIEW
+                </p>
+
+                <h2>
+                    Welcome back, Admin 👋
+                </h2>
+
+                <p>
+                    Monitor your plant disease detection
+                    system from one place.
+                </p>
+
+            </div>
+
+
+            <button class="export-btn"
+                    onclick="exportReport()">
+
+                📥 Export Report
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <div class="stats-grid">
+
+
+            <!-- TOTAL USERS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    👥
+                </div>
+
+                <div>
+
+                    <p>Total Users</p>
+
+                    <h2>
+                        {{ total_users }}
+                    </h2>
+
+                    <span class="positive">
+                        Live
+                    </span>
+
+                    <small>
+                        registered users
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOTAL SCANS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    🔬
+                </div>
+
+                <div>
+
+                    <p>Total Scans</p>
+
+                    <h2>
+                        {{ total_predictions }}
+                    </h2>
+
+                    <span class="positive">
+                        Live
+                    </span>
+
+                    <small>
+                        AI predictions
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISEASES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    🌿
+                </div>
+
+                <div>
+
+                    <p>Diseases Detected</p>
+
+                    <h2>
+                        27
+                    </h2>
+
+                    <span class="positive">
+                        AI
+                    </span>
+
+                    <small>
+                        supported diseases
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACCURACY -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <p>Avg. Accuracy</p>
+
+                    <h2>
+                        96.8%
+                    </h2>
+
+                    <span class="positive">
+                        Model
+                    </span>
+
+                    <small>
+                        prediction accuracy
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ANALYTICS
+        ================================================== -->
+
+        <div class="analytics-grid">
+
+
+            <!-- CHART -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            Detection Activity
+                        </h3>
+
+                        <p>
+                            Plant scans over the last 7 days
+                        </p>
+
+                    </div>
+
+
+                    <select>
+
+                        <option>
+                            Last 7 Days
+                        </option>
+
+                        <option>
+                            Last 30 Days
+                        </option>
+
+                        <option>
+                            Last 6 Months
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="chart">
+
+                    <div class="chart-bars">
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:55%">
+                            </div>
+
+                            <span>Mon</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:72%">
+                            </div>
+
+                            <span>Tue</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:48%">
+                            </div>
+
+                            <span>Wed</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:85%">
+                            </div>
+
+                            <span>Thu</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:68%">
+                            </div>
+
+                            <span>Fri</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:92%">
+                            </div>
+
+                            <span>Sat</span>
+
+                        </div>
+
+
+                        <div class="bar-container">
+
+                            <div class="bar"
+                                 style="height:78%">
+                            </div>
+
+                            <span>Sun</span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SYSTEM STATUS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            System Status
+                        </h3>
+
+                        <p>
+                            Current application health
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="system-status">
+
+
+                    <div class="status-item">
+
+                        <div>
+
+                            <span class="status-dot online"></span>
+
+                            AI Model
+
+                        </div>
+
+                        <strong>
+                            Online
+                        </strong>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div>
+
+                            <span class="status-dot online"></span>
+
+                            Database
+
+                        </div>
+
+                        <strong>
+                            Connected
+                        </strong>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div>
+
+                            <span class="status-dot online"></span>
+
+                            Flask Server
+
+                        </div>
+
+                        <strong>
+                            Running
+                        </strong>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <div>
+
+                            <span class="status-dot warning"></span>
+
+                            Storage
+
+                        </div>
+
+                        <strong>
+                            68%
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="server-health">
+
+                    <div class="health-header">
+
+                        <span>
+                            Server Health
+                        </span>
+
+                        <strong>
+                            92%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress">
+
+                        <div class="progress-value"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         USERS
+    ================================================== -->
+
+    <section id="users"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    USER MANAGEMENT
+                </p>
+
+                <h2>
+                    Registered Users
+                </h2>
+
+                <p>
+                    Manage users registered with PlantAI.
+                </p>
+
+            </div>
+
+
+            <button class="primary-btn">
+                + Add User
+            </button>
+
+        </div>
+
+
+        <div class="table-panel">
+
+            <div class="table-tools">
+
+                <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="🔍 Search users..."
+                    onkeyup="searchUsers()">
+
+                <button>
+                    Filter
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="usersTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Scans</th>
+                            <th>Joined</th>
+                            <th>Status</th>
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <!-- =================================================
+                         REAL DATABASE USERS
+                    ================================================== -->
+
+                    <tbody>
+
+                    {% for user in users %}
+
+                        <tr>
+
+                            <!-- USER -->
+
+                            <td>
+
+                                <div class="user-cell">
+
+                                    <div class="user-avatar">
+
+                                        {{ user.full_name[:2].upper() }}
+
+                                    </div>
+
+                                    {{ user.full_name }}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- EMAIL -->
+
+                            <td>
+
+                                {{ user.email }}
+
+                            </td>
+
+
+                            <!-- SCANS -->
+
+                            <td>
+
+                                {{ user.predictions|length }}
+
+                            </td>
+
+
+                            <!-- JOINED -->
+
+                            <td>
+
+                                {{ user.created_at.strftime('%d %b %Y')
+                                   if user.created_at
+                                   else 'N/A' }}
+
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                <span class="badge active-badge">
+
+                                    Active
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- ACTION -->
+
+                            <td>
+
+                                <button
+                                    class="action-btn"
+                                    onclick="viewUser('{{ user.id }}')">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="6"
+                                style="text-align:center;">
+
+                                No registered users found.
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         SCANS
+    ================================================== -->
+
+    <section id="scans"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    AI DETECTION
+                </p>
+
+                <h2>
+                    Recent Disease Scans
+                </h2>
+
+                <p>
+                    Monitor recent plant disease predictions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="scan-grid">
+
+
+            <div class="scan-card">
+
+                <div class="scan-image">
+                    🍅
+                </div>
+
+                <div class="scan-info">
+
+                    <h3>
+                        Tomato Leaf
+                    </h3>
+
+                    <p>
+                        Early Blight
+                    </p>
+
+                    <div class="confidence">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <strong>
+                            96%
+                        </strong>
+
+                    </div>
+
+                    <div class="confidence-bar">
+
+                        <div style="width:96%"></div>
+
+                    </div>
+
+                </div>
+
+                <span class="disease-badge">
+                    Disease
+                </span>
+
+            </div>
+
+
+            <div class="scan-card">
+
+                <div class="scan-image">
+                    🥔
+                </div>
+
+                <div class="scan-info">
+
+                    <h3>
+                        Potato Leaf
+                    </h3>
+
+                    <p>
+                        Healthy
+                    </p>
+
+                    <div class="confidence">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <strong>
+                            98%
+                        </strong>
+
+                    </div>
+
+                    <div class="confidence-bar">
+
+                        <div style="width:98%"></div>
+
+                    </div>
+
+                </div>
+
+                <span class="healthy-badge">
+                    Healthy
+                </span>
+
+            </div>
+
+
+            <div class="scan-card">
+
+                <div class="scan-image">
+                    🍎
+                </div>
+
+                <div class="scan-info">
+
+                    <h3>
+                        Apple Leaf
+                    </h3>
+
+                    <p>
+                        Apple Scab
+                    </p>
+
+                    <div class="confidence">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <strong>
+                            93%
+                        </strong>
+
+                    </div>
+
+                    <div class="confidence-bar">
+
+                        <div style="width:93%"></div>
+
+                    </div>
+
+                </div>
+
+                <span class="disease-badge">
+                    Disease
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         DISEASES
+    ================================================== -->
+
+    <section id="diseases"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    DISEASE DATABASE
+                </p>
+
+                <h2>
+                    Plant Diseases
+                </h2>
+
+                <p>
+                    Manage diseases supported by the AI model.
+                </p>
+
+            </div>
+
+
+            <button class="primary-btn">
+                + Add Disease
+            </button>
+
+        </div>
+
+
+        <div class="disease-grid">
+
+            <div class="disease-card">
+
+                <div class="disease-icon">
+                    🍅
+                </div>
+
+                <h3>
+                    Tomato Early Blight
+                </h3>
+
+                <p>
+                    Tomato
+                </p>
+
+                <span>
+                    AI Supported
+                </span>
+
+            </div>
+
+
+            <div class="disease-card">
+
+                <div class="disease-icon">
+                    🥔
+                </div>
+
+                <h3>
+                    Potato Late Blight
+                </h3>
+
+                <p>
+                    Potato
+                </p>
+
+                <span>
+                    AI Supported
+                </span>
+
+            </div>
+
+
+            <div class="disease-card">
+
+                <div class="disease-icon">
+                    🍎
+                </div>
+
+                <h3>
+                    Apple Scab
+                </h3>
+
+                <p>
+                    Apple
+                </p>
+
+                <span>
+                    AI Supported
+                </span>
+
+            </div>
+
+
+            <div class="disease-card">
+
+                <div class="disease-icon">
+                    🌽
+                </div>
+
+                <h3>
+                    Corn Rust
+                </h3>
+
+                <p>
+                    Corn
+                </p>
+
+                <span>
+                    AI Supported
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FEEDBACK
+    ================================================== -->
+
+    <section id="feedback"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    USER EXPERIENCE
+                </p>
+
+                <h2>
+                    User Feedback
+                </h2>
+
+                <p>
+                    Review feedback submitted by users.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="feedback-grid">
+
+
+            <div class="feedback-card">
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "The disease prediction was quick and
+                    easy to understand."
+                </p>
+
+                <strong>
+                    — Ananya
+                </strong>
+
+            </div>
+
+
+            <div class="feedback-card">
+
+                <div class="rating">
+                    ★★★★☆
+                </div>
+
+                <p>
+                    "The treatment recommendations are
+                    very useful."
+                </p>
+
+                <strong>
+                    — Anchal
+                </strong>
+
+            </div>
+
+
+            <div class="feedback-card">
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Very simple interface for checking
+                    plant diseases."
+                </p>
+
+                <strong>
+                    — Rahul
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         REPORTS
+    ================================================== -->
+
+    <section id="reports"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    ANALYTICS
+                </p>
+
+                <h2>
+                    Reports & Statistics
+                </h2>
+
+                <p>
+                    Overview of system performance.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-grid">
+
+
+            <div class="report-card">
+
+                <span>
+                    Prediction Accuracy
+                </span>
+
+                <strong>
+                    96.8%
+                </strong>
+
+                <div class="report-progress">
+
+                    <div style="width:96.8%"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <span>
+                    Healthy Plants
+                </span>
+
+                <strong>
+                    62%
+                </strong>
+
+                <div class="report-progress">
+
+                    <div style="width:62%"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-card">
+
+                <span>
+                    Disease Cases
+                </span>
+
+                <strong>
+                    38%
+                </strong>
+
+                <div class="report-progress">
+
+                    <div style="width:38%"></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         SETTINGS
+    ================================================== -->
+
+    <section id="settings"
+             class="page-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    CONFIGURATION
+                </p>
+
+                <h2>
+                    System Settings
+                </h2>
+
+                <p>
+                    Configure PlantAI administration settings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="settings-panel">
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        AI Detection System
+                    </h3>
+
+                    <p>
+                        Enable plant disease prediction.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        User Registration
+                    </h3>
+
+                    <p>
+                        Allow new users to register.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        checked>
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <h3>
+                        Email Notifications
+                    </h3>
+
+                    <p>
+                        Receive system notifications.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input type="checkbox">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 PlantAI |
+            AI Based Plant Disease Detection
+        </p>
+
+        <p>
+            Admin Control Panel
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    function toggleSidebar() {
+
+        const sidebar =
+            document.getElementById("sidebar");
+
+        sidebar.classList.toggle("show");
+
+    }
+
+
+    /* =====================================================
+       SEARCH USERS
+    ===================================================== */
+
+    function searchUsers() {
+
+        const input =
+            document.getElementById("userSearch");
+
+        const filter =
+            input.value.toLowerCase();
+
+        const table =
+            document.getElementById("usersTable");
+
+        const rows =
+            table
+            .getElementsByTagName("tbody")[0]
+            .getElementsByTagName("tr");
+
+
+        for (let i = 0; i < rows.length; i++) {
+
+            const text =
+                rows[i].textContent.toLowerCase();
+
+            rows[i].style.display =
+                text.includes(filter) ? "" : "none";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       VIEW USER
+    ===================================================== */
+
+    function viewUser(userId) {
+
+        alert(
+            "User ID: " + userId
+        );
+
+    }
+
+
+    /* =====================================================
+       EXPORT REPORT
+    ===================================================== */
+
+    function exportReport() {
+
+        const report = `
+PLANTAI ADMIN REPORT
+====================
+
+Total Users: {{ total_users }}
+Total Scans: {{ total_predictions }}
+
+Generated:
+${new Date().toLocaleString()}
+`;
+
+        const blob =
+            new Blob(
+                [report],
+                { type: "text/plain" }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            "PlantAI_Admin_Report.txt";
+
+        link.click();
+
+        URL.revokeObjectURL(url);
+
+    }
+
+
+    /* =====================================================
+       NOTIFICATION
+    ===================================================== */
+
+    function showNotification() {
+
+        alert(
+            "You have 3 new notifications."
+        );
+
+    }
+
+
+    /* =====================================================
+       ACTIVE SIDEBAR MENU
+    ===================================================== */
+
+    const navItems =
+        document.querySelectorAll(".nav-item");
+
+
+    navItems.forEach(function(item) {
+
+        item.addEventListener(
+            "click",
+            function() {
+
+                navItems.forEach(
+                    function(nav) {
+
+                        nav.classList.remove("active");
+
+                    }
+                );
+
+
+                this.classList.add("active");
+
+
+                const sidebar =
+                    document.getElementById("sidebar");
+
+                sidebar.classList.remove("show");
+
+            }
+        );
+
+    });
+
+</script>
+
+
+</body>
+</html>

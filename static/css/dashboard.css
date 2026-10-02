@@ -230,6 +230,8 @@ a {
     margin-left: 255px;
 
     min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -1565,4 +1567,53 @@ footer {
         display: none;
     }
 
+}
+
+ /* =========================================================
+  CONTACT BUTTON FIX
+========================================================= */
+
+.welcome-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.contact-btn,
+.contact-main-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.contact-btn:hover,
+.contact-main-btn:hover {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(0, 30, 20, 0.45),
+            rgba(0, 50, 30, 0.55)
+        ),
+        url("https://tse4.mm.bing.net/th/id/OIP.59W9x_qpvarbUdd0jrj3yAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=300");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    z-index: 0;
+    pointer-events: none;
 }
