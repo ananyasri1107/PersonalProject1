@@ -13,20 +13,10 @@
 <body>
 
     <div class="container">
-<<<<<<< HEAD
+<
         <h1>Create Account</h1>
-=======
-    <h1>Create Account</h1>
-    <!-- Registration Form -->
-    <form action="{{ url_for('account') }}" method="POST">
-        <input type="text" name="name">
-    
-        <input type="email" name="email">
-    
-        <input type="password" name="password">
-    
-        <input type="password" name="confirmPassword">
->>>>>>> 9c3e959782f32608e0f15ca8e80a504117bf8e27
+
+        
 
         {% with messages = get_flashed_messages(with_categories=true) %}
           {% for category, message in messages %}
